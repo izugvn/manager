@@ -1,0 +1,22 @@
+Đăng topic Adelina
+<hr/>
+{%if api.r.getMethod()=='GET'%}
+Không chấp nhận dữ liệu GET
+{%else%}
+
+{%set uid=api.r.get('uid')%}
+{%set back_url=api.r.get('back_url')%}
+{%set text=api.r.get('text')%}
+{%if uid is empty%}
+Chưa có uid topic<br/>
+{%elseif text is empty%}
+Chưa nhập nội dung chat<br/>
+{%else%}
+{%if back_url is empty%}
+{%set back_url=api.r.getRequestUri()%}
+{%endif%}
+{{api.f.post(uid,text)}}
+{{api.redirect(back_url)}}
+{%endif%}
+
+{%endif%}

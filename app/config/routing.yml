@@ -1,0 +1,5 @@
+_hoaian_web:
+    resource: "@HoaianWebBundle/Resources/config/routing.yml"
+
+_hoaian_quanly:
+    resource: "@HoaianQuanlyBundle/Resources/config/routing.yml"

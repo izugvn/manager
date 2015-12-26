@@ -1,0 +1,45 @@
+{#-info Trang login info-#}<!DOCTYPE html><html><head><title>Trang đăng nhập</title>{% include 'HoaianWebBundle:Default:meta.html.twig' %}{% include 'HoaianWebBundle:Default:style.html.twig' with {'input':'true'}%}</head><body><div class="pagewidth" id="mobile-outer-wrapper"><div class="topmenu" id="topmenu"><div class="clear"><span class="first"><a href="/main.php">Trang chủ</a>->Trang đăng nhập</span></div></div><div class="mobile-lheader" style="text-align:left"><img alt="Adelina" src="/bundles/hoaianweb/img/cobethoitietsmall.png" style="margin:2px 0 0 5px;max-width: 110px;" title="cobethoitiet" width="110px" height="30px"></div><div id="navi">Thông tin đăng nhập</div><div class="labelposts">{%if api.r.getMethod()=='POST'%}
+{%if api.r.get('nick') is empty%}
+{%set error='Bạn chưa điền tên tài khoản; '%}
+{%else%}
+{%if '(' in api.r.get('nick') or ')' in api.r.get('nick') or '<' in api.r.get('nick') or '>' in api.r.get('nick') or "'" in api.r.get('nick') or '"' in api.r.get('nick') or '?' in api.r.get('nick') or '=' in api.r.get('nick') or '!' in api.r.get('nick')  or ';' in api.r.get('nick') or '[' in api.r.get('nick') or ']' in api.r.get('nick') or ':' in api.r.get('nick') or '*' in api.r.get('nick') or '%' in api.r.get('nick') or '@' in api.r.get('nick') or '#' in api.r.get('nick') or '^' in api.r.get('nick') or '+' in api.r.get('nick') or '&' in api.r.get('nick') or '$' in api.r.get('nick') or '~' in api.r.get('nick') or '`' in api.r.get('nick') or '|' in api.r.get('nick') or '/' in api.r.get('nick') or ',' in api.r.get('nick')%}
+{%set error=error~'Tên nick không được dùng các kí tự này , & + ^ @ # % : * [ ] ; ( ) < > / | \ " ? = ! '~"' $ ~ ` "~'; '%}
+{%else%}
+{%if api.u.checkUser(api.r.get('nick')|trim)=='false'%}
+{%set error=error~'Tài khoản '~api.r.get('nick') ~ ' chưa được đăng ký; '%}
+{%endif%}
+{%endif%}
+{%endif%}
+
+{%if api.r.get('pass') is empty%}
+{%set error=error~'Bạn chưa điền mật khẩu; '%}
+{%else%}
+{%if api.r.get('pass') matches '/^(\\w*(?=\\w*\\d)(?=\\w*[a-z])(?=\\w*[A-Z])\\w*){6,30}$/'!=true%}
+{%set error=error~'Mật khẩu yếu, phải có số, chữ hoa, chữ thường. Ví dụ: Adelina'~"now"|date('y')~'; '%}
+{%endif%}
+{%endif%}
+{%if api.r.get('nick')|length >=31%}
+{%set error=error~'Độ dài tài khoản phải nhỏ hơn 31; '%}
+{%endif%}
+{%if api.r.get('pass')|length >=31%}
+{%set error=error~'Độ dài mật khẩu phải nhỏ hơn 31; '%}
+{%endif%}
+{%set lnick=api.r.get('nick')|trim%}
+{%set lpass=api.md5(api.r.get('pass')|trim)%}
+{%if api.u.checkLogin(lnick,lpass).pass!=lpass%}
+{%set error=error~'Sai mật khẩu; '%}
+{%endif%}
+
+{%if error is not empty%}
+<b><font color="blue">Lỗi đăng nhập!</font></b><br/>
+<b><font color="red">{{error}}</font></b>
+{%else%}
+{%if api.u.checkLogin(lnick,lpass).pass==lpass%}
+Có thể đăng nhập với id là: {{api.u.checkLogin(lnick,lpass).uid}}
+{{api.r.session.set('user_id',api.u.checkLogin(lnick,lpass).uid)}}
+{{api.redirect('/main.php')}}
+{%endif%}
+{%endif%}
+{%else%}{%if api.r.get('act')=='ok'%}<b><font color="blue">Hướng dẫn!</font></b><br/>
+<b><font color="green">Nhập tài khoản và mật khẩu vào bên dưới để đăng nhập.</font></b>{%else%}<b><font color="blue">Cảnh báo!</font></b><br/>
+<b><font color="red">Truy cập không hợp lệ do bạn chưa nhấn vào nút đăng nhập.</font></b>{%endif%}{%endif%}</div><div id="navi">Đăng nhập vào wap</div><div class="labelposts"><form method="post" action="/main.php?id=log">Tài khoản:<br/><input type="text" name="nick" value="{{ap.r.get('nick')|default(api.s.get('new_nick'))}}"/><br/>Mật khẩu:<br/><input type="password" name="pass" value="{{ap.r.get('pass')|default(api.s.get('new_pass'))}}"/><br/>Quên mật khẩu hãy liên hệ chủ wap.<br/><input type="submit" value="Đăng nhập"/></form></div>{% include 'HoaianWebBundle:Default:footer.html.twig' %}</body></html>

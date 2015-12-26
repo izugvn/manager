@@ -1,0 +1,343 @@
+{#-info Trang chủ info-#}
+{%set dir=cpanel.r.get("c")|default('src/Hoaian/')%}
+{%set bundles_dir="src/"~dir|split("src/")[1]|split("Bundle")[0]~"Bundle"%}
+{%macro item_img(file,dir)%}
+{%if ('.png' in file or '.jpg' in file or '.gif' in file) and 'Resources' in dir and 'public' in dir and 'Bundle' in dir%}
+{%set bundles=dir|replace({"src/":'',"Bundle/Resources/public":''})%}{%set bundles=bundles|lower%}{%set bundlek=bundles|split('/')[0]%}{%set bundleg=bundlek~'/'%}{%set bundle='/bundles/'~bundles%}{%set bundle=bundle|replace({(bundleg):(bundlek)})%}
+<img src="http://adelina.cf{{bundle}}{{file}}" width="16px" height="16px"/>
+{%else%}
+{%if '.' not in file%}{%set file=file~'/'%}{%endif%}
+{%set f=file|split('.')%}{%set l=f|length%}{%set sfile=f[l-1]%}{%set img%}{%if '/' in sfile%}folder{%elseif 'html' in sfile%}html{%elseif 'php' in sfile%}php{%else%}txt{%endif%}{%endset%}<img src="/bundles/hoaianquanly/img/{{img}}.png"/>{%endif%}
+{%endmacro%}
+{%import _self as item%}
+{%if '.php' in dir or '.html' in dir or '.twig' in dir or '.js' in dir or '.css' in dir or '.yml' in dir or '.htaccess' in dir or '.xml' in dir or '.log' in dir%}
+{%set view_file="true"%}
+{%endif%}
+{%if app.request.session.get("user")=="thaian2009" and app.request.session.get("pass")==pass%}
+{%set login="true"%}
+{%endif%}
+<!DOCTYPE html>
+<html>
+<head>
+<title>Cpanel Adeliina</title>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+{%if login=="true"%}
+<link rel="stylesheet" href="{{ asset('bundles/hoaianquanly/css/style_login.css') }}" />
+{%else%}
+<link rel="stylesheet" href="{{ asset('bundles/hoaianquanly/css/style.css') }}" />
+{%endif%}
+{%if view_file=="true"%}
+
+<link rel="stylesheet" href="/bundles/hoaianquanly/codemirror/lib/codemirror.css">
+<link rel="stylesheet" href="/bundles/hoaianquanly/codemirror/addon/display/fullscreen.css">
+<link rel="stylesheet" href="/bundles/hoaianquanly/codemirror/theme/eclipse.css">
+<link rel="stylesheet" href="/bundles/hoaianquanly/codemirror/addon/hint/show-hint.css">
+<link rel="stylesheet" href="/bundles/hoaianquanly/codemirror/addon/fold/foldgutter.css" />
+<link rel="stylesheet" href="/bundles/hoaianquanly/codemirror/addon/dialog/dialog.css">
+<link rel="stylesheet" href="/bundles/hoaianquanly/codemirror/addon/search/matchesonscrollbar.css">
+<link rel="stylesheet" href="/bundles/hoaianquanly/codemirror/css/codemirror-ui.css" type="text/css" media="screen" />
+
+<script src="/bundles/hoaianquanly/codemirror/lib/codemirror.js"></script>
+<script src="/bundles/hoaianquanly/codemirror/lib/util/formatting.js"></script>
+<script src="/bundles/hoaianquanly/codemirror/mode/xml/xml.js"></script>
+<script src="/bundles/hoaianquanly/codemirror/mode/javascript/javascript.js"></script>
+<script src="/bundles/hoaianquanly/codemirror/mode/vbscript/vbscript.js"></script>
+<script src="/bundles/hoaianquanly/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+<script src="/bundles/hoaianquanly/codemirror/mode/css/css.js"></script>
+<script src="/bundles/hoaianquanly/codemirror/mode/php/php.js"></script>
+<script src="/bundles/hoaianquanly/codemirror/mode/jinja2/jinja2.js"></script>
+<script src="/bundles/hoaianquanly/codemirror/mode/twig/twig.js"></script>
+<script src="/bundles/hoaianquanly/codemirror/mode/clike/clike.js"></script>
+
+<script src="/bundles/hoaianquanly/codemirror/addon/display/fullscreen.js"></script>
+<script src="/bundles/hoaianquanly/codemirror/addon/hint/show-hint.js"></script>
+<script src="/bundles/hoaianquanly/codemirror/addon/hint/javascript-hint.js"></script>
+<script src="/bundles/hoaianquanly/codemirror/addon/hint/html-hint.js"></script>
+<script src="/bundles/hoaianquanly/codemirror/addon/fold/foldcode.js"></script>
+<script src="/bundles/hoaianquanly/codemirror/addon/fold/foldgutter.js"></script>
+<script src="/bundles/hoaianquanly/codemirror/addon/fold/xml-fold.js"></script>
+<script src="/bundles/hoaianquanly/codemirror/addon/fold/markdown-fold.js"></script>
+<script src="/bundles/hoaianquanly/codemirror/addon/fold/brace-fold.js"></script>
+<script src="/bundles/hoaianquanly/codemirror/addon/fold/comment-fold.js"></script>
+<script src="/bundles/hoaianquanly/codemirror/mode/markdown/markdown.js"></script>
+<script src="/bundles/hoaianquanly/codemirror/addon/dialog/dialog.js"></script>
+<script src="/bundles/hoaianquanly/codemirror/addon/search/searchcursor.js"></script>
+<script src="/bundles/hoaianquanly/codemirror/addon/search/search.js"></script>
+<script src="/bundles/hoaianquanly/codemirror/addon/search/matchesonscrollbar.js"></script>
+<script src="/bundles/hoaianquanly/codemirror/addon/scroll/annotatescrollbar.js"></script>
+<script src="/bundles/hoaianquanly/codemirror/addon/selection/selection-pointer.js"></script>
+<script src="/bundles/hoaianquanly/codemirror/addon/edit/closebrackets.js"></script>
+<script src="/bundles/hoaianquanly/codemirror/addon/edit/closetag.js"></script>
+<script src="/bundles/hoaianquanly/codemirror/addon/edit/matchtags.js"></script>
+<script src="/bundles/hoaianquanly/codemirror/addon/selection/active-line.js"></script>
+
+<script type="text/javascript">
+function hien()
+{
+	document.getElementById("show_bundles").className="show_bundle";
+}
+</script>
+<style type="text/css">
+    .CodeMirror {border-top: 1px solid black; border-bottom: 1px solid black;}
+	.cm-tab {
+         background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAMCAYAAAAkuj5RAAAAAXNSR0IArs4c6QAAAGFJREFUSMft1LsRQFAQheHPowAKoACx3IgEKtaEHujDjORSgWTH/ZOdnZOcM/sgk/kFFWY0qV8foQwS4MKBCS3qR6ixBJvElOobYAtivseIE120FaowJPN75GMu8j/LfMwNjh4HUpwg4LUAAAAASUVORK5CYII=);
+         background-position: right;
+         background-repeat: no-repeat;
+		 }
+</style>
+{%endif%}
+</head>
+<body>
+<div id="header">Cpanel Adelina</div>
+{%if login=="true"%}
+<ul id="menu_ngang">
+<li><a href="?c=app/">App Config</a></li>
+<li><a href="?c=web/">Web public</a></li>
+<li>
+<a href="{%if view_file=="true"%}javascript:hien();{%else%}?c=src/Hoaian/{%endif%}">Bundle Manager</a>
+<span class="sub" id="show_bundles">
+{%set filelistx=filelist('src/Hoaian/')%}
+{%for i in 2..filelistx|length-1%}
+{%set list_item=filelistx[i]%}
+<div class="list_item"><a href="?c=src/Hoaian/{{list_item}}/">{{list_item}}</a></div>
+{%endfor%}
+</span>
+</li>
+<li><a href="/some.php" target="_blank">Console</a></li>
+
+</ul>
+{%set kdir=dir|split('/')%}
+{%set mdir%}{%for i in 0..kdir|length-2%}{%set ldir=ldir~kdir[i]~'/'%}<a href="?c={{ldir}}">{{kdir[i]}}</a>/{%endfor%}{%endset%}
+
+{%if '.php' not in dir and '.html' not in dir and '.twig' not in dir and '.js' not in dir and '.css' not in dir and '.yml' not in dir and '.htaccess' not in dir and '.xml' not in dir and '.log' not in dir%}
+{%if "src" in dir and "Bundle" in dir%}
+<div class="list_item"><a href="?c={{bundles_dir}}/Controller/">Controller</a> - <a href="?c={{bundles_dir}}/Twig/">Twig</a> - <a href="?c={{bundles_dir}}/Entity/">Entity</a> - <a href="?c={{bundles_dir}}/Resources/">Resources</a> - <a href="?c={{bundles_dir}}/Resources/config/">config</a> - <a href="?c={{bundles_dir}}/Resources/public/">public</a> - <a href="?c={{bundles_dir}}/Resources/views/">views</a></div>
+{%endif%}
+
+{%set filelists=filelist(dir)%}
+<form method="post" action="?c={{dir}}">
+{%for i in 0..filelists|length-1%}
+{%set list_item=filelists[i]%}
+{%if '.' not in filelists[i]%}{%set sdir='true'%}{%else%}{%set sdir='false'%}{%endif%}
+{%set surl%}
+{{dir}}{{list_item}}{{sdir=='true'?'/':''}}
+{%endset%}
+
+
+{%if list_item=='..'%}{%set surl=surl|slice(0,-3)%}{%elseif list_item=='.'%}{%set kurl=surl|split('/')%}{%set kurl=kurl[kurl|length-2]~'/'%}{%set surl=surl|split(kurl)[0]%}{%endif%}
+<div class="list_item{{sdir=='true'?'':' file_item'}}">
+{%if list_item=='..'%}[Location]: <a href="?c={{surl}}">{{mdir}}</a>{%elseif list_item=='.'%}<a href="?c={{surl}}">Back</a>{%else%}<input name="check[]" type="checkbox" value="{{list_item}}" /> {{item.item_img(list_item,dir)}}<a href="?c={{surl}}">{{list_item}}</a> {%if '.twig' ==list_item|slice(-5)%}{%set file_content=cpanel.noidung(dir~list_item)%}{%if '-info' in file_content and 'info-' in file_content%}({{file_content|split('-info')[1]|split('info-')[0]|striptags}}){%endif%}{%endif%}
+
+<span class="item_per">{{filesize(dir~list_item)}}{{fileper(dir~list_item)}}</span>{%endif%}
+</div>
+{%endfor%}
+<div class="list_item"><a href="javascript:var it=document.getElementsByName('check[]'); for(var i=0;i<it.length;i++) { document.getElementsByName('check[]')[i].checked=true; }">Check All</a> / <a href="javascript:var it=document.getElementsByName('check[]'); for(var i=0;i<it.length;i++) { document.getElementsByName('check[]')[i].checked=false; }">Uncheck All</a></div>
+<div class="list_item">
+<select name="option" class="save_item" onchange="check()" id="soption">
+                        <option value="0">Copy</option>
+                        <option value="1">Move</option>
+                        <option value="2">Delete</option>
+                        <option value="3">To zip</option>
+                        <option value="4">Chmod</option>
+                        <option value="5">Rename</option>
+</select>
+<span id="chmod"></span>
+<input type="submit" name="submit" value="Submit Option" class="save_item"/>
+</div>
+</form>
+<div class="item_tool">Tools</div>
+<div class="list_tool"><a href="?act=new_file&c={{dir}}">Create new file</a></div>
+<div class="list_tool"><a href="?act=new_folder&c={{dir}}">Create new folder</a></div>
+<div class="list_tool"><a href="?act=upload&c={{dir}}">Upload file</a></div>
+{%if cpanel.r.get("act")=='upload'%}
+<div class="list_tool">
+<form action="{{cpanel.r.getUri()}}" method="post" enctype="multipart/form-data" name="form1" id="form1">
+<input name="file" type="file" size="20" class="save_item"/>
+<input name="submit" type="submit" value="Upload"  class="save_item"/>
+</form>
+</div>
+{%if cpanel.r.getMethod()=="POST" and cpanel.r.get("submit")%}
+{{cpanel.uploadFile("file",dir)}}
+{{cpanel.redirect(('?c='~dir))}}
+{%endif%}
+{%endif%}
+
+{%if cpanel.r.get("act")=="new_file" or cpanel.r.get("act")=="new_folder"%}
+<div class="list_tool" id="create_new" style="display:block">
+<form method="post" action="?c={{dir}}">
+Input name of file / folder:<br/>
+<input type="hidden" name="act" value="{{cpanel.r.get("act")}}"/>
+<input type="text" name="name" class="save_item" value="{{cpanel.r.get("act")=="new_file"?"New File.php":"New Folder"}}"/><br/>
+<input type="submit" value="Create" class="save_item"/>
+</form>
+</div>
+{%if cpanel.r.getMethod=="POST"%}
+{%if cpanel.r.get("name") is not empty and cpanel.r.get("act")=="new_folder"%}
+{{cpanel.mkdir(dir~cpanel.r.get("name"))}}
+{{cpanel.redirect(cpanel.r.getUri())|raw}}
+{%endif%}
+
+{%if cpanel.r.get("name") is not empty and cpanel.r.get("act")=="new_file"%}
+{{cpanel.fopen(dir~cpanel.r.get("name"))}}
+{{cpanel.redirect(cpanel.r.getUri())|raw}}
+{%endif%}
+{%endif%}
+{#end create#}
+{%endif%}
+
+
+<script type="text/javascript">
+function check() {
+    var x = document.getElementById("soption").value;
+	if(x==4)
+	{
+    	document.getElementById("chmod").innerHTML = '<input type="text" name="nchmod" value="700" class="save_item"/>';
+	}
+}
+</script>
+
+{%if cpanel.r.getMethod()=='POST'%}
+
+{%if cpanel.r.get("option")=='2' and cpanel.r.get("check")%}
+{%set check=cpanel.r.get("check")%}
+{%for i in 0..check|length-1%}
+{%if 'app' not in check[i] and 'web' not in check[i] and 'views' not in check[i] and 'public' not in check[i] and 'Hoaian' not in check[i] and 'src' not in check[i]%}
+{{cpanel.unlink(dir~check[i])}}
+{%endif%}
+{%endfor%}
+{{cpanel.redirect(cpanel.r.getUri())|raw}}
+{%endif%}
+
+{%if cpanel.r.get("option")=='4' and cpanel.r.get("check")%}
+{%set check=cpanel.r.get("check")%}
+{%for i in 0..check|length-1%}
+{{cpanel.chmod(dir~check[i],cpanel.r.get("nchmod"))}}
+{%endfor%}
+{{cpanel.redirect(cpanel.r.getUri())|raw}}
+{%endif%}
+
+{%if cpanel.r.get("option")=='5' and cpanel.r.get("check")%}
+<div class="list_item">
+<form method="post" action="?c={{dir}}">
+{%set check=cpanel.r.get("check")%}
+{%for i in 0..check|length-1%}
+{{dir~check[i]}}
+<input type="hidden" name="old_name[]" value="{{dir~check[i]}}"/>
+<br/>
+<input type="text" name="new_name[]" value="{{dir~check[i]}}" style="width:90%" class="save_item"/><br/>
+{%endfor%}
+<input type="hidden" name="act" value="rename"/>
+<input type="submit" value="Rename" class="save_item"/>
+</form>
+</div>
+{%endif%}
+
+{%if cpanel.r.get("act")=="rename" and cpanel.r.get("new_name") and cpanel.r.get("old_name")%}
+{%set new_name=cpanel.r.get("new_name")%}
+{%set old_name=cpanel.r.get("old_name")%}
+{%for i in 0..new_name|length%}
+{{cpanel.rename(old_name[i],new_name[i])}}
+{%endfor%}
+{{cpanel.redirect(cpanel.r.getUri())|raw}}
+{%endif%}
+
+{%endif%} {#method==POST#}
+{%else%}
+
+
+{%set lurl=dir|split('/')%}{%set lurl=lurl[lurl|length-2]~'/'%}{%set edit_file=dir|split(lurl)%}
+{%if cpanel.r.getMethod()=='POST'%}<center><b style="color:red">..::Save file successfull::..</b></center>{{cpanel.luufile(dir,cpanel.r.get("code"))}}{{cpanel.redirect(cpanel.r.getUri())}}{%endif%}
+
+{%if "src" in dir and "Bundle" in dir%}
+<div class="list_item"><a href="?c={{bundles_dir}}/Controller/">Controller</a> - <a href="?c={{bundles_dir}}/Twig/">Twig</a> - <a href="?c={{bundles_dir}}/Entity/">Entity</a> - <a href="?c={{bundles_dir}}/Resources/">Resources</a> - <a href="?c={{bundles_dir}}/Resources/config/">config</a> - <a href="?c={{bundles_dir}}/Resources/public/">public</a> - <a href="?c={{bundles_dir}}/Resources/views/">views</a></div>
+{%endif%}
+<div class="list_item"><a href="?c={{dir|split(edit_file[1])[0]}}">Back</a></div>
+<div class="list_item"><b>[Location]:</b> {{mdir}}</div>
+<div class="list_item"><b>Editting item:</b> <a href="?c={{dir}}">{{edit_file[1]}}</a></div>
+<form method="post" action="{{cpanel.r.getUri()}}">
+
+<div><div class="codemirror-ui-clearfix codemirror-ui-button-frame row_close"><a class="codemirror-ui-button save" title="Save"><img src="/bundles/hoaianquanly/codemirror/images/silk/page_save.png" border="0"></a><a class="codemirror-ui-button undo  " title="Undo" href="javascript:editor.undo()"><img src="/bundles/hoaianquanly/codemirror/images/silk/arrow_undo.png" border="0"></a><a class="codemirror-ui-button redo inactive" title="Redo" href="javascript:editor.redo()"><img src="/bundles/hoaianquanly/codemirror/images/silk/arrow_redo.png" border="0"></a><a class="codemirror-ui-button jump" title="css" href="javascript:editor.setOption('mode','css')"><img src="/bundles/hoaianquanly/img/txt.png" border="0"></a><a class="codemirror-ui-button reindent" title="html" href="javascript:editor.setOption('mode','text/html')"><img src="/bundles/hoaianquanly/img/html.png" border="0"></a><a class="codemirror-ui-button reindent" title="php" href="javascript:editor.setOption('mode','application/x-httpd-php')"><img src="/bundles/hoaianquanly/img/php.png" border="0"></a><a class="codemirror-ui-button reindent" title="js" href="javascript:editor.setOption('mode','javascript')"><img src="/bundles/hoaianquanly/img/js.png" border="0"></a><a class="codemirror-ui-button reindent" title="twig" href="javascript:editor.setOption('mode','twig')"><img src="/bundles/hoaianquanly/img/twig.png" border="0"></a><a class="codemirror-ui-button save" title="Format" href="javascript:autoFormatSelection()"><img src="/bundles/hoaianquanly/codemirror/images/silk/application_osx_terminal.png" border="0"></a><a class="codemirror-ui-button save" title="Comment" href="javascript:commentSelection(true)"><img src="/bundles/hoaianquanly/codemirror/images/silk/page_white_code.png" border="0"></a><a class="codemirror-ui-button save" title="UnComment" href="javascript:commentSelection(false)"><img src="/bundles/hoaianquanly/codemirror/images/silk/page_white_code_red.png" border="0"></a></div></div>
+<textarea id="code" name="code" rows="10">{{cpanel.noidung(dir)}}</textarea>
+<div class="row_close"><input type="submit" value="Save" class="save_item"/></div>
+</form>
+<script type="text/javascript">
+var mixedMode = {
+        name: "jinja2",
+        scriptTypes: [{matches: /\/x-handlebars-template|\/x-mustache/i,
+                       mode: null},
+                      {matches: /(text|application)\/(x-)?vb(a|script)/i,
+                       mode: "vbscript"}]
+      };
+  var te = document.getElementById("code");
+    var editor = CodeMirror.fromTextArea(te, {
+      lineNumbers: true,
+      theme: "eclipse",
+      foldGutter: true,
+      lineWrapping: true,
+      gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+      mode: {%if ".twig" in dir%}"twig"{%elseif ".php" in dir%}"application/x-httpd-php"{%elseif ".html" in dir%}"text/html"{%elseif ".js" in dir%}"javascript"{%elseif ".css" in dir%}"css"{%elseif ".yml" in dir%}"text/html"{%else%}"text/html"{%endif%},
+      selectionPointer: true,
+      autoCloseBrackets: true,
+      styleActiveLine: true,
+  	  autoCloseTags: true,
+	  tabSize: 4,
+      indentUnit: 4,
+      indentWithTabs: true,
+  	  matchTags: {bothTags: true},
+	  path : 'js/',
+  	  searchMode : 'inline',
+  	  buttons : ['save','undo','redo','jump','reindent','about'],
+      extraKeys: {
+  		"Ctrl-J": "toMatchingTag",
+        "Alt-F": "findPersistent",
+        "Ctrl-Q": function(cm){ cm.foldCode(cm.getCursor()); },
+        "Ctrl-Space": "autocomplete",
+        "F11": function(cm) {
+          cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+        },
+        "Esc": function(cm) {
+          if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
+        }
+      }
+    });
+
+
+	editor.foldCode(CodeMirror.Pos(13, 0));
+      
+      function getSelectedRange() {
+        return { from: editor.getCursor(true), to: editor.getCursor(false) };
+      }
+      
+      function autoFormatSelection() {
+        var range = getSelectedRange();
+        editor.autoFormatRange(range.from, range.to);
+      }
+      
+      function commentSelection(isComment) {
+        var range = getSelectedRange();
+        editor.commentRange(isComment, range.from, range.to);
+      }    
+
+  </script>
+{%endif%}
+<br/>
+<br/>
+{%else%}
+<div align="center" id="login_container">
+{{ form_start(form) }}
+<div id="login">
+<center id="login_title">Login panel</center>
+<hr id="login_line"/>
+<div id="login_input">
+<div>Username:</div>
+{{ form_widget(form.username) }}
+<div>Password:</div>
+{{ form_widget(form.password) }}
+</div>
+<div id="btn_login"><input type="submit" value="Login to Bundle" id="login_button"/></div>
+</div>
+{{ form_end(form) }}
+</div>
+{%endif%}
+</body>
+</html>

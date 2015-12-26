@@ -1,0 +1,11 @@
+{%set main=api.r.session.get('main')|default('main')%}
+{%if main=='home1'%}
+{% include 'HoaianWebBundle:Default:Wap/home_1.html.twig' %}
+{%else%}
+{% include 'HoaianWebBundle:Default:Wap/style_settings.html.twig' %}
+{%endif%}
+
+{%if api.r.get('main') in ' home1 home2 home3 '%}
+{{api.r.session.set('main',api.r.get('main'))}}
+{{api.redirect('/main.php')}}
+{%endif%}

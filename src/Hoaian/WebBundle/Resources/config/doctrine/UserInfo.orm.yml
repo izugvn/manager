@@ -1,0 +1,356 @@
+Hoaian\WebBundle\Entity\UserInfo:
+    type: entity
+    table: user_info
+    indexes:
+        fk_userinfoward:
+            columns:
+                - wardid
+        fk_userinfoprovince:
+            columns:
+                - city
+        fk_userinfodistrict:
+            columns:
+                - districtid
+    uniqueConstraints:
+        nick:
+            columns:
+                - nick
+    id:
+        uid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        nick:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+        pass:
+            type: string
+            nullable: false
+            length: 32
+            options:
+                fixed: false
+        email:
+            type: string
+            nullable: false
+            length: 40
+            options:
+                fixed: false
+                default: ''
+        phone:
+            type: string
+            nullable: true
+            length: 11
+            options:
+                fixed: false
+                default: '0'
+        fb:
+            type: string
+            nullable: true
+            length: 20
+            options:
+                fixed: false
+                default: ''
+        website:
+            type: string
+            nullable: true
+            length: 20
+            options:
+                fixed: false
+                default: ''
+        sex:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '1'
+        married:
+            type: integer
+            nullable: true
+            options:
+                unsigned: true
+                default: '0'
+        marriedWith:
+            type: integer
+            nullable: true
+            options:
+                unsigned: true
+                default: '0'
+            column: married_with
+        lover:
+            type: string
+            nullable: true
+            length: 30
+            options:
+                fixed: false
+                default: ''
+        level:
+            type: integer
+            nullable: true
+            options:
+                unsigned: true
+                default: '0'
+        plus:
+            type: integer
+            nullable: true
+            options:
+                unsigned: true
+                default: '100'
+        chatMsg:
+            type: integer
+            nullable: true
+            options:
+                unsigned: true
+                default: '0'
+            column: chat_msg
+        pmMsg:
+            type: integer
+            nullable: true
+            options:
+                unsigned: true
+                default: '0'
+            column: pm_msg
+        profilePhotoUrl:
+            type: string
+            nullable: true
+            length: 80
+            options:
+                fixed: false
+                default: ''
+            column: profile_photo_url
+        coverUrl:
+            type: string
+            nullable: true
+            length: 80
+            options:
+                fixed: false
+                default: ''
+            column: cover_url
+        vikteSk:
+            type: integer
+            nullable: true
+            options:
+                unsigned: true
+                default: '0'
+            column: vikte_sk
+        wordSk:
+            type: integer
+            nullable: true
+            options:
+                unsigned: true
+                default: '0'
+            column: word_sk
+        login:
+            type: integer
+            nullable: true
+            options:
+                unsigned: true
+                default: '0'
+        regTime:
+            type: integer
+            nullable: true
+            options:
+                unsigned: true
+                default: '0'
+            column: reg_time
+        browser:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+                default: ''
+        ip:
+            type: string
+            nullable: true
+            length: 20
+            options:
+                fixed: false
+                default: ''
+        location:
+            type: string
+            nullable: true
+            length: 20
+            options:
+                fixed: false
+                default: ''
+        loged:
+            type: integer
+            nullable: true
+            options:
+                unsigned: true
+                default: '0'
+        refs:
+            type: integer
+            nullable: true
+            options:
+                unsigned: true
+                default: '0'
+        country:
+            type: string
+            nullable: true
+            length: 30
+            options:
+                fixed: false
+                default: ''
+        city:
+            type: string
+            nullable: true
+            length: 5
+            options:
+                fixed: false
+        districtid:
+            type: string
+            nullable: true
+            length: 5
+            options:
+                fixed: false
+        wardid:
+            type: string
+            nullable: true
+            length: 5
+            options:
+                fixed: false
+        name:
+            type: string
+            nullable: true
+            length: 30
+            options:
+                fixed: false
+                default: ''
+        birthday:
+            type: integer
+            nullable: true
+            options:
+                unsigned: true
+                default: '0'
+        height:
+            type: integer
+            nullable: true
+            options:
+                unsigned: true
+                default: '0'
+        weight:
+            type: integer
+            nullable: true
+            options:
+                unsigned: true
+                default: '0'
+        music:
+            type: string
+            nullable: true
+            length: 30
+            options:
+                fixed: false
+                default: ''
+        fBookFilm:
+            type: string
+            nullable: true
+            length: 30
+            options:
+                fixed: false
+                default: ''
+            column: f_book_film
+        hobby:
+            type: string
+            nullable: true
+            length: 30
+            options:
+                fixed: false
+                default: ''
+        attitude:
+            type: string
+            nullable: true
+            length: 20
+            options:
+                fixed: false
+                default: ''
+        dream:
+            type: string
+            nullable: true
+            length: 20
+            options:
+                fixed: false
+                default: ''
+        education:
+            type: string
+            nullable: true
+            length: 30
+            options:
+                fixed: false
+                default: ''
+        school:
+            type: string
+            nullable: true
+            length: 30
+            options:
+                fixed: false
+                default: ''
+        job:
+            type: string
+            nullable: true
+            length: 20
+            options:
+                fixed: false
+                default: ''
+        status:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+                default: ''
+        pmNew:
+            type: integer
+            nullable: true
+            options:
+                unsigned: true
+                default: '0'
+            column: pm_new
+        pmCount:
+            type: integer
+            nullable: true
+            options:
+                unsigned: true
+                default: '0'
+            column: pm_count
+        banReason:
+            type: string
+            nullable: true
+            length: 30
+            options:
+                fixed: false
+                default: ''
+            column: ban_reason
+        setlike:
+            type: integer
+            nullable: true
+            options:
+                unsigned: true
+                default: '0'
+        getlike:
+            type: integer
+            nullable: true
+            options:
+                unsigned: true
+                default: '0'
+        follow:
+            type: integer
+            nullable: true
+            options:
+                unsigned: true
+                default: '0'
+        step:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+                default: '0'
+    lifecycleCallbacks: {  }

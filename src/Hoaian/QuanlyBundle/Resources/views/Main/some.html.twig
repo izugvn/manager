@@ -1,0 +1,23 @@
+{#-info Some Command info-#}<!DOCTYPE html>
+<html>
+<head>
+<title>Cpanel Adeliina</title>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+<link rel="stylesheet" href="{{ asset('bundles/hoaianquanly/css/style_login.css') }}" />
+</head>
+<body>
+<div id="header">Cpanel Adelina</div>
+{%if app.request.session.get("user")!="thaian2009"%}
+<div class="list_item"><center>Non login to Bundle</center></div>
+<div class="list_item"><a href="/cpanel/"><center>Click here to login</center></a></div>
+{%else%}
+<div class="list_item"><a href="/some.php?act=1">Clear Cache</a></div>
+<div class="list_item"><a href="/some.php?act=2">Create Doctrine yml</a></div>
+<div class="list_item"><a href="/some.php?act=3">Mapping Doctrine</a></div>
+<div class="list_item"><a href="/some.php?act=4">Doctrine Php</a></div>
+<div class="list_item"><a href="/some.php?act=5">Create Symlink</a></div>
+<div class="list_item"><a href="/some.php?act=6">Asset Dump</a></div>
+<div class="list_item">Nội dung:<br/>{{scontent}}</div>
+{%endif%}
+</body>
+</html>

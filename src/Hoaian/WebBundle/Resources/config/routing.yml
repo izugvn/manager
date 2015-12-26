@@ -1,0 +1,9 @@
+hoaian_web_homepage1:
+    pattern:  /
+    defaults: { _controller: HoaianWebBundle:Default:index }
+hoaian_web_homepage2:
+    pattern:  /main.php
+    defaults: { _controller: HoaianWebBundle:Default:index }
+hoaian_web_pm1:
+    pattern:  /pm.php
+    defaults: { _controller: HoaianWebBundle:Default:pm }

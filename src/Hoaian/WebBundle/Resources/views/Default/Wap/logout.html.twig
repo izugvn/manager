@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Xác nhận thoát wap</title>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8"/>
+<meta content="initial-scale=1, width=device-width" name="viewport">
+<link rel="canonical" href="http://adelina.ga{{api.r.getRequestUri()}}"/>
+</head>
+<body>
+Thoát wap
+<hr/>
+<b>Bạn muốn thoát khỏi wap?</b></font></b><br/><center><form method="post" action="/main.php?id=logout"><input type="submit" value="Thoát ngay" name="yes"/> / <input type="submit" value="Không thoát" name="no"/></form></center>{%if api.r.getMethod()=='POST'%}{%if api.r.get('no') is not empty%}{{api.redirect('main.php')}}{%endif%}{%if api.r.get('yes') is not empty%}{{api.r.session.clear()}}{{api.redirect('main.php')}}{%endif%}{%endif%}
+<hr/>
+<a href="main.php">Quay trở ra</a>
+</body></html>

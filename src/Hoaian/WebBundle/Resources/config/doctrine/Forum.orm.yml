@@ -1,0 +1,47 @@
+Hoaian\WebBundle\Entity\Forum:
+    type: entity
+    table: forum
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        userId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+            column: user_id
+        userUid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+            column: user_uid
+        idForum:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+            column: id_forum
+        date:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        text:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+    lifecycleCallbacks: {  }

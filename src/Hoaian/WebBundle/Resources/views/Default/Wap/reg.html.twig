@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trang đăng kí Adelina</title>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8"/>
+<meta content="initial-scale=1, width=device-width" name="viewport">
+<link rel="canonical" href="http://adelina.ga{{api.r.getRequestUri()}}"/>
+</head>
+<body>
+Trang đăng ký Adelina
+<hr/>
+{%if api.r.getMethod()=='POST'%}
+{%set error=''%}
+{%if api.r.get('new_nick') is empty%}
+{%set snick='Bạn chưa nhập tên nick; '%}
+{%endif%}
+{%if api.r.get('new_pass') is empty%}
+{%set spass=spass~'Bạn chưa nhập mật khẩu; '%}
+{%endif%}
+{%if api.r.get('d') == 'd' or api.r.get('d') matches '/[0-9]{1,2}/' !=true%}
+{%set error=error~'Bạn chưa chọn ngày sinh; '%}
+{%endif%}
+{%if api.r.get('m') == 'm' or api.r.get('m') matches '/[0-9]{1,2}/' !=true%}
+{%set error=error~'Bạn chưa chọn tháng sinh; '%}
+{%endif%}
+{%if api.r.get('y') == 'y' or api.r.get('y') matches '/[0-9]{4}/' !=true%}
+{%set error=error~'Bạn chưa chọn năm sinh; '%}
+{%endif%}
+{%if api.r.get('sex') is empty%}
+{%set error=error~'Bạn chưa chọn giới tính; '%}
+{%endif%}
+{%if api.r.get('email') matches '/([\\w\-]+\\@[\\w\\-]+\\.[\\w\\-]+)/' !=true%}
+{%set error=error~'Email không hợp lệ. Ví dụ: it.thaian2009@gmail.com; '%}
+{%endif%}
+{%if '(' in api.r.get('new_nick') or ')' in api.r.get('new_nick') or '<' in api.r.get('new_nick') or '>' in api.r.get('new_nick') or "'" in api.r.get('new_nick') or '"' in api.r.get('new_nick') or '?' in api.r.get('new_nick') or '=' in api.r.get('new_nick') or '!' in api.r.get('new_nick')  or ';' in api.r.get('new_nick') or '[' in api.r.get('new_nick') or ']' in api.r.get('new_nick') or ':' in api.r.get('new_nick') or '*' in api.r.get('new_nick') or '%' in api.r.get('new_nick') or '@' in api.r.get('new_nick') or '#' in api.r.get('new_nick') or '^' in api.r.get('new_nick') or '+' in api.r.get('new_nick') or '&' in api.r.get('new_nick') or '$' in api.r.get('new_nick') or '~' in api.r.get('new_nick') or '`' in api.r.get('new_nick') or '|' in api.r.get('new_nick') or '/' in api.r.get('new_nick') or ',' in api.r.get('new_nick')%}
+{%set error=error~'Tên nick không được dùng các kí tự này , & + ^ @ # % : * [ ] ; ( ) < > / | \ " ? = ! '~"' $ ~ ` "~'; '%}
+{%endif%}
+
+
+{%if api.r.get('new_nick')|length <=3 or api.r.get('new_nick')|length >= 31%}
+{%set warning='Độ dài tên nick phải từ 3 đến 30; '%}
+{%endif%}
+{%if api.r.get('new_pass')|length < 6 or api.r.get('new_pass')|length >= 31%}
+{%set warning=warning~'Độ dài tên mật khẩu phải từ 6 đến 30; '%}
+{%endif%}
+{%if api.r.get('new_pass') matches '/^(\\w*(?=\\w*\\d)(?=\\w*[a-z])(?=\\w*[A-Z])\\w*){6,30}$/'!=true%}
+{%set warning=warning~'Mật khẩu yếu, phải có số, chữ hoa, chữ thường. Ví dụ: Adelina'~"now"|date('y')~'; '%}
+{%endif%}
+
+{%if error is not empty%}
+<b><font color="blue">Lỗi nhập liệu!</font></b><br/>
+<b><font color="red">{{error}}</font></b>
+{%endif%}
+{%if warning is not empty%}
+<br/>
+<b><font color="blue">Lỗi bảo mật!</font></b><br/>
+<b><font color="#090">{{warning}}</font></b>
+{%endif%}
+
+{%if (error ~ warning)|length ==0 %}
+{%set new_nick=api.r.get('new_nick')|trim%}
+{%if api.u.checkUser(new_nick)=='true'%}
+<b><font color="blue">Lỗi tồn tại nick!</font></b><br/>
+<b><font color="red">Đã có người đăng kí nick {{new_nick}}. Xin chọn tên nick khác.</font></b>
+{%else%}
+	Tên nick: {{api.r.get('new_nick')|trim}}<br/>
+	Mật khẩu: {{api.md5(api.r.get('new_pass'))|trim}}<br/>
+	Email: {{api.r.get('email')}}<br/>
+	Giới tính: {{api.r.get('sex')}}<br/>
+	Ngày hiện tại U: {{'now'|date('U')}}<br/>
+	Browser: {{api.r.headers.get('User-Agent')}}<br/>
+	Ip: {{api.r.getClientIp()}}<br/>
+	Ngày sinh: {{(api.r.get('d')~'-'~api.r.get('m')~'-'~api.r.get('y'))|date('U')}}<br/>
+	.......................................................................................
+	{%set lnick=api.r.get('new_nick')|trim%}
+	{%set lpass=api.md5(api.r.get('new_pass'))|trim%}
+	{%set lemail=api.r.get('email')%}
+	{%set lsex=api.r.get('sex')%}
+	{%set lreg_time='now'|date('U')%}
+	{%set lbrowser=api.r.headers.get('User-Agent')%}
+	{%set lip=api.r.getClientIp()%}
+	{%set lbirthday=(api.r.get('d')~'-'~api.r.get('m')~'-'~api.r.get('y'))|date('U')%}
+	{{api.u.newUser(lnick,lpass,lemail,lsex,lreg_time,lbrowser,lip,lbirthday)}}
+	{{api.s.set('new_nick',lnick)}}{{api.s.set('new_pass',api.r.get('new_pass')|trim)}}
+	{{api.redirect('/main.php?f=6')}}
+{%endif%}
+{%endif%}
+
+
+{%else%}
+<b><font color="blue">Cảnh báo!</font></b><br/>
+<b><font color="red">Truy cập không hợp lệ do bạn chưa nhấn vào nút đăng kí.</font></b>
+{%endif%}
+<hr/>
+Đăng kí nick mới
+<form method="post" action="/main.php?id=reg">Tên nick:<br/><input type="text" name="new_nick" value="{{api.r.get('new_nick')|trim}}"/><br/>Mật khẩu:<br/><input type="password" name="new_pass" value="{{api.r.get('new_pass')|trim}}"/><br/>Ngày sinh của bạn:<br/><select name="d"><option>d</option>{%for i in 1..30%}<option {%if api.r.get('d')==i%}selected{%endif%}>{{i}}</option>{%endfor%}</select>&#160;/&#160;<select name="m"><option>m</option>{%for j in 1..12%}<option {%if api.r.get('m')==j%}selected{%endif%}>{{j}}</option>{%endfor%}</select>&#160;/&#160;<select name="y"><option>y</option>{%for k in 1980..2015%}<option {%if api.r.get('y')==k%}selected{%endif%}>{{k}}</option>{%endfor%}</select><br/>Địa chỉ Email:<br/><input type="text" name="email" value="{{api.r.get('email')|default('@')|trim}}"/><br/>Giới tính:<br/><input type="radio" name="sex" value="1" {%if api.r.get('sex')==1%}checked{%endif%}>Nam&#160;<input type="radio" name="sex" value="2" {%if api.r.get('sex')==2%}checked{%endif%}>Nữ<br/>Không được đăng kí nick spam.<br/><input type="submit" value="Đăng ký tài khoản"/></form>
+<hr/>
+<a href="main.php">Quay trở ra</a>
+</body>
+</html>

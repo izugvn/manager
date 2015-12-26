@@ -1,0 +1,11 @@
+_cpanel:
+  path : /cpanel/
+  defaults:  { _controller: HoaianQuanlyBundle:Default:main }
+  requirements:
+    _method:  GET|POST
+
+_hinhminhhoa:
+  pattern:  /some.php
+  defaults:  { _controller: HoaianQuanlyBundle:Some:some }
+  requirements:
+    _method:  GET|POST

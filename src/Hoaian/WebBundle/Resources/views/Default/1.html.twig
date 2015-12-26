@@ -1,0 +1,13 @@
+{#-info Trang chủ chưa đăng nhập info-#}
+{#{%if api.r.get('id')=='reg'%}
+{% include 'HoaianWebBundle:Default:reg.html.twig' %}
+{%elseif api.r.get('id')=='log'%}
+{% include 'HoaianWebBundle:Default:log.html.twig' %}
+{%else%}
+{% include 'HoaianWebBundle:Default:home1.html.twig' %}
+{%endif%}#}
+{%if api.device=='computer'%}
+{% include 'HoaianWebBundle:Default:Wap/index_un.htnl.twig' %}
+{%else%}
+{% include 'HoaianWebBundle:Default:Wap/index_un.htnl.twig' %}
+{%endif%}

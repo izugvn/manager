@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trang chủ Adelina</title>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8"/>
+<meta content="initial-scale=1, width=device-width" name="viewport">
+<link rel="canonical" href="http://adelina.ga{{api.r.getRequestUri()}}"/>
+</head>
+<body>
+Trang chủ mobile
+<hr/>
+<center>
+	<form method="post" action="{{api.f.form_url(2)}}">
+		Nhập nội dung chat:
+		<br/>
+		<textarea name="text"></textarea>
+		<br/>
+		<input type="submit" value="Chat"/>
+	</form>
+	</center>
+
+<div class="message_list">
+{%set forum=api.f.get(2)%}
+{%for i in 0..forum|length-1%}
+<div class="list1">{{api.u.get(forum[i]['user_id']).nick}}: {{forum[i].text}}</div>
+{%endfor%}
+</div>
+
+<a href="/main.php?id=logout">Đăng xuất</a>({{api.u.get(api.user_id).nick}})
+</body></html>

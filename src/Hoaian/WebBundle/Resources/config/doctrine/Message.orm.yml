@@ -1,0 +1,53 @@
+Hoaian\WebBundle\Entity\Message:
+    type: entity
+    table: message
+    indexes:
+        uid:
+            columns:
+                - uid
+        nick_uid:
+            columns:
+                - nick_uid
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        uid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        nickUid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+            column: nick_uid
+        message:
+            type: string
+            nullable: false
+            length: 10000
+            options:
+                fixed: false
+                default: ''
+        date:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        status:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+    lifecycleCallbacks: {  }

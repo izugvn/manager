@@ -1,0 +1,53 @@
+Hoaian\WebBundle\Entity\Library:
+    type: entity
+    table: library
+    indexes:
+        refid:
+            columns:
+                - refid
+        text:
+            columns:
+                - name
+        name:
+            columns:
+                - name
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        view:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+        refid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        realid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        name:
+            type: text
+            nullable: false
+            length: 16777215
+            options:
+                fixed: false
+        content:
+            type: text
+            nullable: false
+            length: null
+            options:
+                fixed: false
+    lifecycleCallbacks: {  }

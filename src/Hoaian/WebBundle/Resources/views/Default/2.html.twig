@@ -1,0 +1,11 @@
+{#-info Trang đăng nhập info-#}
+{#{%if api.r.get('id')=='logout'%}
+{% include 'HoaianWebBundle:Default:logout.html.twig' %}
+{%else%}
+{% include 'HoaianWebBundle:Default:home2.html.twig' %}
+{%endif%}#}
+{%if api.device=='computer'%}
+{% include 'HoaianWebBundle:Default:Wap/index_log.html.twig' %}
+{%else%}
+{% include 'HoaianWebBundle:Default:Wap/index_log.html.twig' %}
+{%endif%}

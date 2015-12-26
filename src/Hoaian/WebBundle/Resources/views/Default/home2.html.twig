@@ -1,0 +1,11 @@
+{%set main=api.r.session.get('main')|default('main')%}
+{%if main=='main'%}
+{% include 'HoaianWebBundle:Default:trangchu.html.twig' %}
+{%else%}
+Chat
+{%endif%}
+
+{%if api.r.get('main') in ' main chat friend '%}
+{{api.r.session.set('main',api.r.get('main'))}}
+{{api.redirect('/main.php')}}
+{%endif%}

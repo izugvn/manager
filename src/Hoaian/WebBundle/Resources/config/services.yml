@@ -1,0 +1,7 @@
+services:
+    app.twig_extension:
+        class: Hoaian\WebBundle\Twig\AppExtension
+        public: true
+        arguments: []
+        tags:
+            - { name: twig.extension }

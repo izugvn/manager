@@ -1,0 +1,53 @@
+Hoaian\WebBundle\Entity\Friend:
+    type: entity
+    table: friend
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        userId:
+            type: integer
+            nullable: true
+            options:
+                unsigned: true
+                default: '0'
+            column: user_id
+        friendId:
+            type: integer
+            nullable: true
+            options:
+                unsigned: true
+                default: '0'
+            column: friend_id
+        type:
+            type: integer
+            nullable: true
+            options:
+                unsigned: true
+                default: '0'
+        status:
+            type: integer
+            nullable: true
+            options:
+                unsigned: true
+                default: '0'
+        date:
+            type: string
+            nullable: true
+            length: 10
+            options:
+                fixed: false
+                default: '0'
+        other:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+    lifecycleCallbacks: {  }

@@ -1,0 +1,7 @@
+{%if api.r.get('id')=='logout'%}
+{% include 'HoaianWebBundle:Default:Wap/logout.html.twig' %}
+{%elseif api.r.get('id')=='ch_topic_h'%}
+{% include 'HoaianWebBundle:Default:Wap/post.html.twig' %}
+{%else%}
+{% include 'HoaianWebBundle:Default:Wap/home_log.html.twig' %}
+{%endif%}

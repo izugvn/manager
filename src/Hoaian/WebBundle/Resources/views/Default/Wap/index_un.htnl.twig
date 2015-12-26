@@ -1,0 +1,7 @@
+{%if api.r.get('id')=='reg'%}
+{% include 'HoaianWebBundle:Default:Wap/reg.html.twig' %}
+{%elseif api.r.get('id')=='log'%}
+{% include 'HoaianWebBundle:Default:Wap/log.html.twig' %}
+{%else%}
+{% include 'HoaianWebBundle:Default:Wap/home_un.html.twig' %}
+{%endif%}
